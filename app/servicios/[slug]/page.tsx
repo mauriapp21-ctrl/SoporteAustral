@@ -6,7 +6,10 @@ import { ArrowRight, Check } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { SERVICES, getService, ACCENT_CLASSES } from "@/lib/services";
+import { LOCATIONS } from "@/lib/locations";
+import { breadcrumbList, serviceNode, faqPageNode } from "@/lib/schema";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/json-ld";
 import { CtaSection } from "@/components/cta-section";
 import { Reveal } from "@/components/reveal";
 
@@ -41,8 +44,17 @@ export default async function ServicioPage({ params }: Params) {
   const accent = ACCENT_CLASSES[service.accent];
   const otros = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3);
 
+  const breadcrumbs = breadcrumbList([
+    { name: "Inicio", url: "/" },
+    { name: "Servicios", url: "/servicios" },
+    { name: service.name, url: `/servicios/${service.slug}` },
+  ]);
+
   return (
     <>
+      <JsonLd data={serviceNode(service)} />
+      <JsonLd data={breadcrumbs} />
+      {service.faqs.length > 0 && <JsonLd data={faqPageNode(service.faqs)} />}
       <section className="border-b border-border bg-background-soft">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:items-center lg:px-8">
           <Reveal>
@@ -110,6 +122,63 @@ export default async function ServicioPage({ params }: Params) {
           </p>
         </div>
       </section>
+
+      {/* Cobertura por ciudad (SEO local) */}
+      <section className="border-t border-border bg-background-soft">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <Reveal>
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              {service.name} por ciudad
+            </h2>
+            <p className="mt-3 max-w-2xl text-muted-foreground">
+              Entregamos {service.name.toLowerCase()} en las principales
+              ciudades de la Región de Los Lagos. Elige tu ciudad:
+            </p>
+          </Reveal>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {LOCATIONS.map((l) => (
+              <Link
+                key={l.slug}
+                href={`/servicios/${service.slug}/${l.slug}`}
+                className="rounded-full border border-border bg-white px-4 py-1.5 text-sm font-medium text-primary transition-colors hover:border-primary/30"
+              >
+                {service.name} en {l.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Preguntas frecuentes */}
+      {service.faqs.length > 0 && (
+        <section className="border-t border-border bg-white">
+          <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+            <Reveal>
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                Preguntas frecuentes
+              </h2>
+              <p className="mt-3 text-muted-foreground">
+                Resolvemos las dudas más habituales sobre {service.name.toLowerCase()}.
+              </p>
+            </Reveal>
+            <div className="mt-8 divide-y divide-border rounded-2xl border border-border">
+              {service.faqs.map((faq, i) => (
+                <Reveal key={faq.question} delay={i * 0.05}>
+                  <details className="group px-6 py-5 [&_summary::-webkit-details-marker]:hidden">
+                    <summary className="flex cursor-pointer items-center justify-between gap-4 text-base font-medium text-foreground marker:content-none">
+                      {faq.question}
+                      <ArrowRight className="size-5 shrink-0 text-primary transition-transform group-open:rotate-90" />
+                    </summary>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {faq.answer}
+                    </p>
+                  </details>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Otros servicios */}
       <section className="border-t border-border bg-background-soft">

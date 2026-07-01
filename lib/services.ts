@@ -32,6 +32,8 @@ export interface Service {
   image: string;
   /** Texto alternativo descriptivo para SEO/accesibilidad. */
   imageAlt: string;
+  /** Preguntas frecuentes (AEO / FAQPage). */
+  faqs: { question: string; answer: string }[];
 }
 
 export const SERVICES: Service[] = [
@@ -56,6 +58,23 @@ export const SERVICES: Service[] = [
     image: "/images/soporte-ti.jpg",
     imageAlt:
       "Especialista de soporte informático atendiendo a una empresa en Chile",
+    faqs: [
+      {
+        question: "¿Qué incluye el soporte informático para empresas?",
+        answer:
+          "Incluye mesa de ayuda con SLA, soporte remoto y en terreno, administración de equipos y usuarios, y mantención preventiva programada. El alcance se ajusta a cada empresa tras un diagnóstico inicial sin costo.",
+      },
+      {
+        question: "¿Atienden soporte en terreno en Puerto Montt y la región de Los Lagos?",
+        answer:
+          "Sí. Contamos con equipo local que realiza soporte en terreno en Puerto Montt, Puerto Varas, Llanquihue, Frutillar, Calbuco y el resto de la Región de Los Lagos, además de soporte remoto para todo Chile.",
+      },
+      {
+        question: "¿Cuál es el tiempo de respuesta del soporte?",
+        answer:
+          "Trabajamos con SLA (acuerdos de nivel de servicio) comprometidos por contrato, con tiempos de respuesta priorizados según la criticidad del incidente y seguimiento de tickets de principio a fin.",
+      },
+    ],
   },
   {
     slug: "cloud",
@@ -78,6 +97,23 @@ export const SERVICES: Service[] = [
     image: "/images/cloud.jpg",
     imageAlt:
       "Infraestructura de servidores y servicios cloud para empresas en Chile",
+    faqs: [
+      {
+        question: "¿Qué plataformas cloud implementan?",
+        answer:
+          "Trabajamos principalmente con Microsoft 365 y Azure, y también con AWS y Google Workspace. Elegimos la plataforma según las necesidades, el presupuesto y las aplicaciones de cada empresa.",
+      },
+      {
+        question: "¿Cómo migran a la nube sin interrumpir la operación?",
+        answer:
+          "Planificamos la migración por fases, con respaldos previos, ventanas de mantención coordinadas y validación posterior. El objetivo es que el cambio sea transparente para los usuarios.",
+      },
+      {
+        question: "¿Los respaldos en la nube están incluidos?",
+        answer:
+          "Sí. Configuramos respaldos automáticos y planes de recuperación ante desastres (DRP) para asegurar la continuidad operacional ante fallos, ransomware o borrados accidentales.",
+      },
+    ],
   },
   {
     slug: "ciberseguridad",
@@ -100,6 +136,23 @@ export const SERVICES: Service[] = [
     image: "/images/ciberseguridad.jpg",
     imageAlt:
       "Concepto de ciberseguridad y protección de datos para empresas en Chile",
+    faqs: [
+      {
+        question: "¿Qué medidas de ciberseguridad necesita una pyme?",
+        answer:
+          "Las prioridades de alto impacto y bajo costo son: respaldos automáticos, autenticación multifactor (MFA), EDR/antivirus de nueva generación, capacitación de usuarios y un plan básico de respuesta ante incidentes.",
+      },
+      {
+        question: "¿Ofrecen monitoreo continuo?",
+        answer:
+          "Sí. Implementamos protección perimetral, EDR y gestión de vulnerabilidades con monitoreo continuo para detectar y contener amenazas antes de que afecten la operación.",
+      },
+      {
+        question: "¿Realizan capacitación contra phishing?",
+        answer:
+          "Sí. Incluimos concientización de usuarios y campañas de phishing simulado, porque la mayoría de los incidentes comienza por un error humano evitable con formación.",
+      },
+    ],
   },
   {
     slug: "desarrollo-software",
@@ -122,6 +175,23 @@ export const SERVICES: Service[] = [
     image: "/images/desarrollo-software.jpg",
     imageAlt:
       "Pantalla con código durante el desarrollo de software a medida en Chile",
+    faqs: [
+      {
+        question: "¿Cuándo conviene un software a medida en vez de uno genérico?",
+        answer:
+          "Cuando los procesos del negocio no encajan en las soluciones estándar, cuando se necesitan integraciones específicas o cuando el software genérico obliga a trabajar de forma ineficiente. El desarrollo a medida se adapta al negocio, no al revés.",
+      },
+      {
+        question: "¿Qué tecnologías utilizan?",
+        answer:
+          "Construimos aplicaciones web modernas, APIs e integraciones con tecnologías vigentes y mantenibles, priorizando escalabilidad, seguridad y facilidad de evolución en el tiempo.",
+      },
+      {
+        question: "¿Dan mantención después de entregar el software?",
+        answer:
+          "Sí. Ofrecemos mantención y evolución continua para corregir, mejorar y hacer crecer el sistema a medida que cambian las necesidades de la empresa.",
+      },
+    ],
   },
   {
     slug: "business-intelligence",
@@ -144,6 +214,23 @@ export const SERVICES: Service[] = [
     image: "/images/business-intelligence.jpg",
     imageAlt:
       "Dashboard de Business Intelligence con gráficos de Power BI en Chile",
+    faqs: [
+      {
+        question: "¿Qué es Business Intelligence y para qué sirve?",
+        answer:
+          "Business Intelligence (BI) transforma los datos dispersos de una empresa en dashboards e informes claros para tomar decisiones basadas en evidencia. Con Power BI centralizamos fuentes, definimos KPIs y automatizamos la reportería.",
+      },
+      {
+        question: "¿Pueden integrar datos de varios sistemas?",
+        answer:
+          "Sí. Integramos múltiples fuentes (ERP, planillas, bases de datos, servicios en la nube) en un modelo de datos único y confiable que alimenta los tableros de Power BI.",
+      },
+      {
+        question: "¿Cuánto tarda en estar listo un dashboard?",
+        answer:
+          "Depende de la cantidad y calidad de las fuentes, pero un primer tablero con los KPIs clave suele estar operativo en pocas semanas, iterando luego según el feedback del equipo.",
+      },
+    ],
   },
   {
     slug: "automatizacion",
@@ -166,6 +253,23 @@ export const SERVICES: Service[] = [
     image: "/images/automatizacion.jpg",
     imageAlt:
       "Automatización de procesos empresariales con flujos de trabajo digitales",
+    faqs: [
+      {
+        question: "¿Qué procesos se pueden automatizar?",
+        answer:
+          "Tareas repetitivas y basadas en reglas: aprobaciones, notificaciones, traspaso de datos entre sistemas, generación de reportes, procesamiento de documentos y correos. El objetivo es reducir tiempo manual y errores.",
+      },
+      {
+        question: "¿Qué herramientas usan para automatizar?",
+        answer:
+          "Principalmente Power Automate e integraciones entre sistemas, sumando inteligencia artificial aplicada para procesar documentos y datos no estructurados cuando aporta valor.",
+      },
+      {
+        question: "¿La automatización requiere cambiar mis sistemas actuales?",
+        answer:
+          "No necesariamente. En la mayoría de los casos conectamos e integramos los sistemas que ya usas, evitando reemplazos costosos y aprovechando la inversión existente.",
+      },
+    ],
   },
 ];
 

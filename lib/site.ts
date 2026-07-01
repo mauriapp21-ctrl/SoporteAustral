@@ -15,6 +15,46 @@ export const SITE = {
     country: "Chile",
     postalCode: "5480000",
   },
+  // Coordenadas aproximadas del centro de Puerto Montt (para LocalBusiness/GeoCoordinates).
+  geo: { latitude: -41.4717, longitude: -72.9369 },
+  // Horario de atención comercial (para OpeningHoursSpecification).
+  openingHours: {
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const,
+    opens: "09:00",
+    closes: "18:00",
+  },
+  // Principales ciudades de la Región de Los Lagos donde se ofrece servicio (areaServed).
+  areasServed: [
+    "Puerto Montt",
+    "Puerto Varas",
+    "Llanquihue",
+    "Frutillar",
+    "Calbuco",
+    "Maullín",
+    "Los Muermos",
+    "Cochamó",
+    "Castro",
+    "Ancud",
+    "Quellón",
+    "Dalcahue",
+    "Chonchi",
+    "Achao",
+  ] as const,
+  // Temas de especialidad (knowsAbout) para motores de IA.
+  knowsAbout: [
+    "Soporte informático",
+    "Mesa de ayuda",
+    "Outsourcing TI",
+    "Servicios cloud",
+    "Microsoft 365",
+    "Ciberseguridad",
+    "Desarrollo de software",
+    "Business Intelligence",
+    "Power BI",
+    "Automatización de procesos",
+    "Infraestructura TI",
+    "Respaldos y continuidad operacional",
+  ] as const,
   social: {
     linkedin: "https://www.linkedin.com/company/soporte-austral",
     facebook: "https://www.facebook.com/soporteaustral",
