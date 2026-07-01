@@ -6,6 +6,8 @@ import { ArrowLeft } from "lucide-react";
 
 import { SITE } from "@/lib/site";
 import { POSTS, getPost, formatDate } from "@/lib/blog";
+import { breadcrumbList } from "@/lib/schema";
+import { JsonLd } from "@/components/json-ld";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
 
@@ -43,20 +45,26 @@ export default async function PostPage({ params }: Params) {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
+    image: `${SITE.url}${post.image}`,
     datePublished: post.date,
-    author: { "@type": "Organization", name: SITE.name },
-    publisher: { "@type": "Organization", name: SITE.name },
+    dateModified: post.date,
+    articleSection: post.category,
+    inLanguage: "es-CL",
+    author: { "@type": "Organization", name: SITE.name, url: SITE.url },
+    publisher: { "@id": `${SITE.url}/#organization` },
     mainEntityOfPage: `${SITE.url}/blog/${post.slug}`,
   };
 
+  const breadcrumbs = breadcrumbList([
+    { name: "Inicio", url: "/" },
+    { name: "Blog", url: "/blog" },
+    { name: post.title, url: `/blog/${post.slug}` },
+  ]);
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-        }}
-      />
+      <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumbs} />
       <article>
         <header className="border-b border-border bg-background-soft">
           <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">

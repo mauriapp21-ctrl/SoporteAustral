@@ -7,6 +7,10 @@ import { SITE } from "@/lib/site";
 export type FormState = { ok: boolean; message: string } | null;
 
 const TO = process.env.CONTACT_EMAIL || SITE.email;
+// Remitente configurable: al verificar el dominio en Resend, define
+// RESEND_FROM (ej. "Soporte Austral <contacto@soporteaustral.cl>") para
+// mejorar la entregabilidad. Mientras tanto usa el remitente de pruebas.
+const FROM = process.env.RESEND_FROM || "Soporte Austral <onboarding@resend.dev>";
 
 // Etiquetas legibles para los campos de los formularios.
 const LABELS: Record<string, string> = {
@@ -97,7 +101,7 @@ export async function sendLead(
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { error } = await resend.emails.send({
-      from: "Soporte Austral <onboarding@resend.dev>",
+      from: FROM,
       to: TO,
       replyTo: email,
       subject: `[${label}] Nuevo mensaje de ${nombre}`,

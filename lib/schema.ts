@@ -100,7 +100,7 @@ export function localBusinessNode() {
   };
 }
 
-/** Nodo WebSite con SearchAction (sitelinks searchbox). */
+/** Nodo WebSite. */
 export function webSiteNode() {
   return {
     "@type": "WebSite",
@@ -110,14 +110,6 @@ export function webSiteNode() {
     description: SITE.description,
     publisher: { "@id": ORG_ID },
     inLanguage: "es-CL",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${SITE.url}/blog?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 

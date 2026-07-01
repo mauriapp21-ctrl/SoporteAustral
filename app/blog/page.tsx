@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Artículos sobre tecnología para empresas: soporte TI, cloud, ciberseguridad, datos y automatización, con foco en el sur de Chile.",
-  alternates: { canonical: "/blog" },
+  alternates: {
+    canonical: "/blog",
+    types: {
+      "application/rss+xml": [{ url: "/blog/rss.xml", title: "Blog Soporte Austral" }],
+    },
+  },
 };
 
 export default function BlogPage() {
