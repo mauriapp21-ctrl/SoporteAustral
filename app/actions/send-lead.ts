@@ -28,6 +28,29 @@ const TYPE_LABEL: Record<string, string> = {
   postulacion: "Postulación",
 };
 
+/**
+ * Envía un aviso a WhatsApp usando CallMeBot (gratis). Solo actúa si están
+ * definidas las variables WHATSAPP_PHONE y CALLMEBOT_APIKEY. Nunca lanza:
+ * si falla, se registra y el formulario igual se considera enviado (el
+ * correo por Resend es el canal principal).
+ */
+async function notifyWhatsApp(label: string, nombre: string, email: string) {
+  const phone = process.env.WHATSAPP_PHONE;
+  const apikey = process.env.CALLMEBOT_APIKEY;
+  if (!phone || !apikey) return;
+
+  const text = encodeURIComponent(
+    `Nuevo ${label} en soporteaustral.cl\nDe: ${nombre}\nCorreo: ${email}`
+  );
+  const url = `https://api.callmebot.com/whatsapp.php?phone=${phone}&text=${text}&apikey=${apikey}`;
+
+  try {
+    await fetch(url, { method: "GET" });
+  } catch (err) {
+    console.error("CallMeBot error:", err);
+  }
+}
+
 export async function sendLead(
   _prev: FormState,
   formData: FormData
@@ -90,6 +113,9 @@ export async function sendLead(
         message: "No pudimos enviar tu mensaje. Intenta nuevamente.",
       };
     }
+
+    // Notificación opcional a WhatsApp vía CallMeBot (no bloquea el flujo).
+    await notifyWhatsApp(label, nombre, email);
 
     return {
       ok: true,

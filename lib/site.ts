@@ -5,7 +5,9 @@ export const SITE = {
   description:
     "Servicios TI para empresas del sur de Chile: soporte informático, cloud, ciberseguridad, desarrollo de software, Business Intelligence y automatización de procesos.",
   email: "contacto@soporteaustral.cl",
-  phone: "+56 9 0000 0000",
+  phone: "+56 9 8573 8648",
+  // Número de WhatsApp sin "+" ni espacios (formato para wa.me y APIs).
+  whatsapp: "56985738648",
   address: {
     street: "Av. Diego Portales 100, Oficina 5",
     city: "Puerto Montt",
