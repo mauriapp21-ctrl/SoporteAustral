@@ -1,65 +1,216 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Clock,
+  MapPin,
+  ShieldCheck,
+  Users,
+} from "lucide-react";
 
-export default function Home() {
+import { cn } from "@/lib/utils";
+import { SERVICES, ACCENT_CLASSES } from "@/lib/services";
+import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/reveal";
+import { CtaSection } from "@/components/cta-section";
+import { HomeHero } from "@/components/home-hero";
+import { LogoMarquee } from "@/components/logo-marquee";
+
+const DIFERENCIADORES = [
+  {
+    icon: MapPin,
+    title: "Cercanía local",
+    text: "Equipo en el sur de Chile. Soporte en terreno en Puerto Montt y la región de Los Lagos, no un call center lejano.",
+  },
+  {
+    icon: Clock,
+    title: "SLA garantizado",
+    text: "Tiempos de respuesta comprometidos por contrato y mesa de ayuda con seguimiento de tickets de principio a fin.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Seguridad primero",
+    text: "Buenas prácticas de ciberseguridad integradas en cada servicio, desde el respaldo hasta el acceso de usuarios.",
+  },
+  {
+    icon: Users,
+    title: "Un solo socio TI",
+    text: "Soporte, cloud, desarrollo y datos bajo un mismo equipo. Menos proveedores, más coherencia.",
+  },
+];
+
+const CASOS = [
+  {
+    sector: "Acuícola",
+    title: "Centro de cultivo conectado en zonas remotas",
+    text: "Implementamos enlaces redundantes y respaldo cloud para una salmonera con operaciones en el sur austral, asegurando continuidad operacional.",
+    metric: "99,9% uptime",
+  },
+  {
+    sector: "Retail regional",
+    title: "Dashboards de ventas con Power BI",
+    text: "Centralizamos datos de 12 sucursales en tableros de Business Intelligence, reduciendo el cierre mensual de días a horas.",
+    metric: "-80% tiempo de reporte",
+  },
+  {
+    sector: "Servicios profesionales",
+    title: "Migración completa a Microsoft 365",
+    text: "Migramos correo, archivos y colaboración a la nube para un estudio con 60 usuarios, sin interrumpir la operación.",
+    metric: "60 usuarios migrados",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      {/* ============ HERO ============ */}
+      <HomeHero />
+
+      {/* ============ CONFIANZA / LOGOS ============ */}
+      <LogoMarquee />
+
+      {/* ============ BENTO SERVICIOS ============ */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              Todo lo que tu empresa necesita en TI
+            </h2>
+            <p className="mt-4 text-base text-muted-foreground">
+              Seis áreas de especialidad, un solo equipo. Diseñamos la solución
+              según tu operación, no al revés.
+            </p>
+          </Reveal>
+
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map((s, i) => {
+              const Icon = s.icon;
+              const accent = ACCENT_CLASSES[s.accent];
+              return (
+                <Reveal key={s.slug} delay={i * 0.05}>
+                  <Link
+                    href={`/servicios/${s.slug}`}
+                    className="group flex h-full flex-col rounded-2xl border border-border bg-white p-6 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-slate-900/5"
+                  >
+                    <span
+                      className={cn(
+                        "grid size-12 place-items-center rounded-xl",
+                        accent.bg
+                      )}
+                    >
+                      <Icon className={cn("size-6", accent.text)} />
+                    </span>
+                    <h3 className="mt-5 text-lg font-semibold text-foreground">
+                      {s.name}
+                    </h3>
+                    <p className="mt-2 flex-1 text-sm text-muted-foreground">
+                      {s.tagline}
+                    </p>
+                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+                      Conocer más
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </Link>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* ============ DIFERENCIADORES ============ */}
+      <section className="border-y border-border bg-background-soft">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-center">
+            <Reveal>
+              <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+                Por qué Soporte Austral
+              </h2>
+              <p className="mt-4 text-base text-muted-foreground">
+                No somos un proveedor más. Somos el equipo TI que entiende la
+                realidad de operar en el sur: distancias, conectividad y la
+                necesidad de respuestas rápidas y reales.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {[
+                  "Atención en español, con personas, no robots",
+                  "Propuestas claras y precios transparentes",
+                  "Acompañamiento de largo plazo",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-foreground">
+                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {DIFERENCIADORES.map((d, i) => {
+                const Icon = d.icon;
+                return (
+                  <Reveal key={d.title} delay={i * 0.05}>
+                    <div className="h-full rounded-2xl border border-border bg-white p-6">
+                      <span className="grid size-11 place-items-center rounded-xl bg-primary/10">
+                        <Icon className="size-5 text-primary" />
+                      </span>
+                      <h3 className="mt-4 text-base font-semibold text-foreground">
+                        {d.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-muted-foreground">{d.text}</p>
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* ============ CASOS DE ÉXITO ============ */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <Reveal className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+                Resultados que se notan
+              </h2>
+              <p className="mt-4 text-base text-muted-foreground">
+                Algunos proyectos recientes con empresas de la región.
+              </p>
+            </div>
+            <Button asChild variant="link" size="sm">
+              <Link href="/casos-de-exito">
+                Ver todos los casos <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+          </Reveal>
+
+          <div className="mt-12 grid gap-4 lg:grid-cols-3">
+            {CASOS.map((c, i) => (
+              <Reveal key={c.title} delay={i * 0.05}>
+                <article className="flex h-full flex-col rounded-2xl border border-border bg-background-soft p-6">
+                  <span className="text-xs font-semibold uppercase tracking-wide text-primary">
+                    {c.sector}
+                  </span>
+                  <h3 className="mt-3 text-lg font-semibold text-foreground">
+                    {c.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm text-muted-foreground">
+                    {c.text}
+                  </p>
+                  <p className="mt-5 text-2xl font-semibold text-foreground">
+                    {c.metric}
+                  </p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ CTA FINAL ============ */}
+      <CtaSection />
+    </>
   );
 }

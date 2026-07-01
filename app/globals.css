@@ -1,26 +1,73 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+/* ===========================================================
+   Soporte Austral — Design tokens
+   Clean tech corporativo. Azul primario único interactivo.
+   Morado/cyan solo para acentos puntuales (IA / features).
+   =========================================================== */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ffffff;        /* fondo principal */
+  --background-soft: #f8fafc;   /* fondo suave alterno */
+  --surface: #eef2f7;           /* bordes / superficies sutiles */
+  --foreground: #0f172a;        /* texto principal */
+  --muted-foreground: #475569;  /* texto secundario */
+
+  --primary: #2563eb;           /* azul CTAs / interactivo */
+  --primary-hover: #3b82f6;     /* azul hover */
+  --primary-foreground: #ffffff;
+
+  --accent-purple: #8b5cf6;     /* acento IA (puntual) */
+  --accent-cyan: #06b6d4;       /* acento IA (puntual) */
+
+  --border: #eef2f7;
+  --ring: #2563eb;
+
+  --radius: 0.875rem;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-soft: var(--background-soft);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-accent-purple: var(--accent-purple);
+  --color-accent-cyan: var(--accent-cyan);
+
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-sans);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--primary) 18%, transparent);
 }
