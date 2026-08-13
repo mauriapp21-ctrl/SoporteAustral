@@ -1,17 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SITE } from "@/lib/site";
 
-const LOGOS = [
-  "Acuinova",
-  "Patagonia Retail",
-  "Estudio Andes",
-  "Grupo Reloncaví",
-  "LogiSur",
-  "Maderas del Sur",
-  "Salmones Chiloé",
-  "Austral Foods",
-];
+const LOGOS = SITE.trustedClients;
 
 export function LogoMarquee() {
   return (

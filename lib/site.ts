@@ -62,4 +62,17 @@ export const SITE = {
     tiktok: "https://www.tiktok.com/@soporteaustral",
     youtube: "https://www.youtube.com/@soporteaustral",
   },
+  // Empresas mostradas en la vitrina "Empresas del sur de Chile confían en nosotros" (home).
+  // Para actualizar: agrega, quita o edita nombres en esta lista.
+  trustedClients: [
+    "GMEmpresas",
+    "Ferretería Montenava",
+    "Mline",
+    "MaqAustral",
+    "Metalmar",
+    "Deluxe Perfumería",
+    "Austral Clean",
+    "Patagonia Radio",
+    "ArtVision",
+  ] as const,
 } as const;
